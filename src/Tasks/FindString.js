@@ -18,7 +18,7 @@ export default class FindString extends Component {
     var n = str.length;
     for (var i = 0; i < n - 1; i++) {
       if (String.fromCharCode(str[i].charCodeAt(0) + 1) == str[i + 1]) {
-        data.push(` ${str[i]}`);
+        data.push(`${str[i]}`);
         result++;
         while (String.fromCharCode(str[i].charCodeAt(0) + 1) === str[i + 1]) {
           data.push(str[i + 1]);

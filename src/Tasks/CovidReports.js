@@ -3,6 +3,7 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 import axios from "axios";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import Select from "react-dropdown-select";
 
 export default class CovidReports extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class CovidReports extends Component {
           "x-rapidapi-key": `b2b4545d72mshc4bf734d6f5b0eep10ccaajsnd62f344e9fee`,
         },
       };
+      // setInterval(async () => {}, 5000);
       await axios
         .get("https://covid-19-statistics.p.rapidapi.com/regions", header)
         .then((res) => {
@@ -51,7 +53,6 @@ export default class CovidReports extends Component {
 
   render() {
     const { region, reports, options, selectedRegion } = this.state;
-
     const defaultOption = options[0];
 
     return (
@@ -63,12 +64,13 @@ export default class CovidReports extends Component {
             <Row>
               <Col sm={3}></Col>
               <Col sm={6}>
-                <Dropdown
+                <Select
                   options={options}
                   onChange={(data, i) => {
-                    this.setState({ selectedRegion: data.value });
+                    if (data[0]) {
+                      this.setState({ selectedRegion: data[0].value });
+                    }
                   }}
-                  // value={defaultOption}
                   placeholder="Select Your Region"
                 />
               </Col>
@@ -96,7 +98,7 @@ export default class CovidReports extends Component {
 
             <tbody>
               {selectedRegion ? (
-                reports.map((res) =>
+                reports.map((res, i) =>
                   res.region.iso === selectedRegion ? (
                     <tr>
                       <th>{res.region.name}</th>
