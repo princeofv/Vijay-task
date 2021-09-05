@@ -6,7 +6,7 @@ import FindString from "./Tasks/FindString";
 export default function TabIndex() {
   return (
     <div>
-      <Tabs defaultActiveKey="Task-1" id="uncontrolled-tab-example" className="mb-3">
+      <Tabs defaultActiveKey="Task-1" id="uncontrolled-tab-example">
         <Tab eventKey="Task-1" title="Task-1">
           <CovidReports />
         </Tab>

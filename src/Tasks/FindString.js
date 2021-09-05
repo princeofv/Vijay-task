@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { Chip } from "@material-ui/core";
+import { Chip, Grid, TextField } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 
 export default class FindString extends Component {
@@ -12,23 +12,22 @@ export default class FindString extends Component {
       output: "",
     };
   }
-  substringChecker(s) {
-    let longestSub = "",
-      length = 0,
-      start = 0,
-      prev = s[0];
-    for (var i = 1; i <= s.length; ++i) {
-      if (i == s.length || s[i] < prev) {
-        if (length < i - start) {
-          longestSub = s.substring(start, i);
-          length = i - start;
+  substringChecker(str) {
+    var data = [];
+    var result = 0;
+    var n = str.length;
+    for (var i = 0; i < n - 1; i++) {
+      if (String.fromCharCode(str[i].charCodeAt(0) + 1) == str[i + 1]) {
+        data.push(` ${str[i]}`);
+        result++;
+        while (String.fromCharCode(str[i].charCodeAt(0) + 1) === str[i + 1]) {
+          data.push(str[i + 1]);
+          i++;
         }
-        start = i;
       }
-      prev = s[i];
     }
 
-    return longestSub;
+    return data.join("");
   }
   findOutput(array) {
     const data = [];
@@ -52,38 +51,39 @@ export default class FindString extends Component {
         <div style={{ marginTop: "5%" }}>
           <Row>
             <Col>
-              {" "}
-              {/* <Button variant="primary" onClick={() => this.findOutput(array)}>
-                Find Output
-              </Button> */}{" "}
-              <Button
-                variant="primary"
-                onClick={() => {
-                  const d1 = [];
-                  this.setState({ array: d1, value: d1, output: d1 });
+              <h1>Find the Substrings in alphabetic order</h1>
+              <hr></hr>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <TextField
+                // id="standard-full-width"
+                // label="Enter Your Input"
+                style={{ margin: 8 }}
+                type="text"
+                placeholder="Enter Your Input"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                value={value}
+                InputLabelProps={{
+                  shrink: true,
                 }}
-              >
-                Reset
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h1>Output : {output ? output : <div></div>}</h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Control
+                onChange={(v, i) => {
+                  this.setState({ value: v.target.value });
+                }}
+              />
+              {/* <Form.Control
                 size="lg"
                 type="text"
                 placeholder="Enter Your Input"
                 onChange={(v, i) => {
                   this.setState({ value: v.target.value });
                 }}
-              />
+              /> */}
               <br></br>
-              <div>
+              <Grid container direction="row" justifyContent="space-around" alignItems="center">
                 <Button
                   variant="primary"
                   onClick={() => {
@@ -99,14 +99,30 @@ export default class FindString extends Component {
                 >
                   Add Items
                 </Button>
-              </div>
+
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    const d1 = [];
+                    this.setState({ array: d1, value: d1, output: d1 });
+                  }}
+                >
+                  Reset
+                </Button>
+              </Grid>
             </Col>
 
             <Col>
               {/* {array
                    && array != "" ? array.map((res) => <Card.Text>{res}</Card.Text>) : <div></div>} */}
-              {array && array != "" ? array.map((res) => <Chip label={res} icon={<DoneIcon />} />) : <div></div>}
+              {array && array != "" ? (
+                array.map((res, i) => <Chip key={i} label={res} icon={<DoneIcon />} />)
+              ) : (
+                <div></div>
+              )}
+              <h1>Output : {output ? output : <div></div>}</h1>
             </Col>
+            <Col></Col>
           </Row>
         </div>
       </Container>
