@@ -13,41 +13,71 @@ export default class CovidReports extends Component {
       reports: [],
       options: [],
       selectedRegion: "",
+      timer: false,
     };
+  }
+  async getData() {
+    const header = {
+      headers: {
+        "x-rapidapi-key": `b2b4545d72mshc4bf734d6f5b0eep10ccaajsnd62f344e9fee`,
+      },
+    };
+    // setInterval(async () => {}, 5000);
+    await axios
+      .get("https://covid-19-statistics.p.rapidapi.com/regions", header)
+      .then((res) => {
+        const region1 = res.data.data;
+        const region = region1.sort(function (a, b) {
+          var nameA = a.name.toUpperCase();
+          var nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        });
+        this.setState({ region: region });
+
+        const options = region.map((v, i) => ({
+          value: v.iso,
+          label: v.name,
+        }));
+        this.setState({ options: options });
+        this.setState({ timer: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    await axios
+      .get("https://covid-19-statistics.p.rapidapi.com/reports", header)
+      .then((res) => {
+        const reports = res.data.data;
+        this.setState({ reports: reports });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   async componentDidMount() {
     try {
-      const header = {
-        headers: {
-          "x-rapidapi-key": `b2b4545d72mshc4bf734d6f5b0eep10ccaajsnd62f344e9fee`,
-        },
-      };
-      // setInterval(async () => {}, 5000);
-      await axios
-        .get("https://covid-19-statistics.p.rapidapi.com/regions", header)
-        .then((res) => {
-          const region = res.data.data;
-          this.setState({ region: region });
-          const options = region.map((v, i) => ({
-            value: v.iso,
-            label: v.name,
-          }));
-          this.setState({ options: options });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      await axios
-        .get("https://covid-19-statistics.p.rapidapi.com/reports", header)
-        .then((res) => {
-          const reports = res.data.data;
-          this.setState({ reports: reports });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      this.getData();
     } catch (err) {
       console.log(`err`, err);
+    }
+  }
+
+  timerFunction() {
+    setTimeout(() => {
+      this.getData();
+      this.setState({ timer: false });
+    }, 5000);
+  }
+
+  componentDidUpdate() {
+    if (this.state.timer == true) {
+      this.timerFunction();
     }
   }
 
