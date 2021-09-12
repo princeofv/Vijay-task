@@ -5,9 +5,9 @@ export default class ImageZoom extends Component {
   render() {
     return (
       <Container>
-        <div class="article-container">
-          <div class="article-img-holder"></div>
-          <p class="article-title-link">Music that will wake you up on your way to work</p>
+        <div className="article-container">
+          <div className="article-img-holder"></div>
+          <p className="article-title-link">Music that will wake you up on your way to work</p>
         </div>
       </Container>
     );
