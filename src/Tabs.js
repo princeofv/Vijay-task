@@ -3,6 +3,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import CovidReports from "./Tasks/CovidReports";
 import ImageZoom from "./Tasks/ImageZoom";
 import FindString from "./Tasks/FindString";
+import ContactChips from "./Tasks/ContactChips";
 export default function TabIndex() {
   return (
     <div>
@@ -15,6 +16,10 @@ export default function TabIndex() {
         </Tab>
         <Tab eventKey="Task-3" title="Task-3">
           <FindString />
+        </Tab>
+
+        <Tab eventKey="Task-4" title="Contact chips">
+          <ContactChips />
         </Tab>
       </Tabs>
     </div>
