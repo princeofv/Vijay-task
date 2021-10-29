@@ -122,7 +122,9 @@ export default class FindString extends Component {
                     label={res}
                     variant="outlined"
                     color="primary"
-                    avatar={<Avatar src="/static/images/avatar/1.jpg" />}
+                    avatar={
+                      <Avatar src="https://image.shutterstock.com/image-vector/man-character-face-avatar-glasses-260nw-562077406.jpg" />
+                    }
                     icon={<DoneIcon />}
                   />
                 ))

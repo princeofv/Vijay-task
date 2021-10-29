@@ -21,7 +21,6 @@ export default class ReactLightbox extends Component {
 
   render() {
     const { photoIndex, isOpen } = this.state;
-
     return (
       <div>
         <button type="button" onClick={() => this.setState({ isOpen: true })}>
