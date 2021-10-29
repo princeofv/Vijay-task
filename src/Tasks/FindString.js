@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { Chip, Grid, TextField } from "@material-ui/core";
+import { Chip, Grid, TextField, Avatar } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 
 export default class FindString extends Component {
@@ -116,7 +116,16 @@ export default class FindString extends Component {
               {/* {array
                    && array != "" ? array.map((res) => <Card.Text>{res}</Card.Text>) : <div></div>} */}
               {array && array != "" ? (
-                array.map((res, i) => <Chip key={i} label={res} icon={<DoneIcon />} />)
+                array.map((res, i) => (
+                  <Chip
+                    key={i}
+                    label={res}
+                    variant="outlined"
+                    color="primary"
+                    avatar={<Avatar src="/static/images/avatar/1.jpg" />}
+                    icon={<DoneIcon />}
+                  />
+                ))
               ) : (
                 <div></div>
               )}
