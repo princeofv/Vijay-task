@@ -19,9 +19,9 @@ export default function TabIndex() {
           <FindString />
         </Tab>
 
-        {/* <Tab eventKey="Task-4" title="Contact chips">
+        <Tab eventKey="Task-4" title="Contact chips">
           <ContactChips />
-        </Tab> */}
+        </Tab>
         <Tab eventKey="Task-5" title="Image Lightbox">
           <ReactLightbox />
         </Tab>
