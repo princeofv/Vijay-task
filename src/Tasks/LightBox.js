@@ -26,7 +26,6 @@ export default class ReactLightbox extends Component {
         <button type="button" onClick={() => this.setState({ isOpen: true })}>
           Open Lightbox
         </button>
-
         {isOpen && (
           <Lightbox
             mainSrc={images[photoIndex]}

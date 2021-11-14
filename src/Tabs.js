@@ -5,10 +5,11 @@ import ImageZoom from "./Tasks/ImageZoom";
 import FindString from "./Tasks/FindString";
 import ContactChips from "./Tasks/ContactChips";
 import ReactLightbox from "./Tasks/LightBox";
+import ManualLightbox from "./Tasks/ManualLightbox";
 export default function TabIndex() {
   return (
     <div>
-      <Tabs defaultActiveKey="Task-1" id="uncontrolled-tab-example">
+      <Tabs defaultActiveKey="Task-1">
         <Tab eventKey="Task-1" title="Task-1">
           <CovidReports />
         </Tab>
@@ -24,6 +25,9 @@ export default function TabIndex() {
         </Tab>
         <Tab eventKey="Task-5" title="Image Lightbox">
           <ReactLightbox />
+        </Tab>
+        <Tab eventKey="Task-6" title="Manual Lightbox">
+          <ManualLightbox />
         </Tab>
       </Tabs>
     </div>

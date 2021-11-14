@@ -1,0 +1,32 @@
+.image-card {
+  width: 30vw;
+  height: 30vw;
+  object-fit: cover;
+}
+
+#lightbox-img {
+  height: 90vh;
+  max-width: 100vw;
+  object-fit: cover;
+}
+
+#lightbox {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(99, 95, 95, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*Completely optional styling that has nothing to do with the lightbox*/
+.button {
+  color: white;
+  border: 2px solid #a167da;
+  background-color: #a167da;
+  font-size: 1.2rem;
+}
